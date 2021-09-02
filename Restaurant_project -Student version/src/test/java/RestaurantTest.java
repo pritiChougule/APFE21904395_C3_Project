@@ -4,6 +4,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +40,21 @@ class RestaurantTest {
         Mockito.when(spiedRestaurant.getCurrentTime()).thenReturn(morningHours);
         assertFalse(spiedRestaurant.isRestaurantOpen());
         //WRITE UNIT TEST CASE HERE
+    }
 
+    @Test
+    public void getting_the_amount_total_of_items_selected_in_the_menu(){
+        restaurant.addToMenu("Sweet corn soup",180);
+        restaurant.addToMenu("Vegetable lasagne", 220);
+        restaurant.addToMenu("Vegetable cheese lasagne", 200);
+        restaurant.addToMenu("Cheese lasagne", 200);
+        List<String> itemNames= new ArrayList<>();
+        itemNames.add("Sweet corn soup");
+        itemNames.add("Vegetable lasagne");
+        itemNames.add("Vegetable cheese lasagne");
+        itemNames.add("Cheese lasagne");
+        double totalAmount=restaurant.totalOrderValue(itemNames);
+        assertEquals(800,totalAmount);
     }
 
 
