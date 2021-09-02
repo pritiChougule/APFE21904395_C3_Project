@@ -5,8 +5,17 @@ import java.util.List;
 public class RestaurantService {
     private static List<Restaurant> restaurants = new ArrayList<>();
 
-    public Restaurant findRestaurantByName(String restaurantName){
-        return null;
+    public RestaurantService(){
+        restaurants.add(new Restaurant("Restaurant1","New Delhi",LocalTime.now(),LocalTime.now()));
+    }
+
+    public Restaurant findRestaurantByName(String restaurantName) throws restaurantNotFoundException {
+
+        for(Restaurant restaurant:restaurants){
+            if(restaurant.getName().equals(restaurantName)){
+                return restaurant;}
+        }
+        throw new restaurantNotFoundException(restaurantName + "does not exist");
         //DELETE ABOVE STATEMENT AND WRITE CODE HERE
     }
 
